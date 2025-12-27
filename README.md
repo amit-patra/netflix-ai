@@ -17,6 +17,10 @@ https://github.com/akshaymarch7/netflix-gpt
 - Update Profile API call
 - Implementd Signout
 - Fethc from TMDB Movie
+- Bug Fix: for Auth URL: /Browse or / navigation 
+- Bug Fix: Unsubscribe onAuthStateChanged at the time of logout
+- Bug Fix: Header User logo and Logout button displaying without login
+- Separate all URL in constants file
 
 # Features
     - Login/ Sign up

@@ -1,23 +1,45 @@
-import { signOut } from "firebase/auth";
-import React from "react";
-import { useSelector } from "react-redux";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { addUser, removeUser } from "../utils/userSlice";
+import { LOGO_URL } from "../utils/constants";
 
 export const Header = () => {
+  const dispatch = useDispatch();
   const userDetails = useSelector((store) => store.user);
   const navigate = useNavigate();
   const handleSignOut = () => {
     signOut(auth)
-      .then(() => {
-        navigate("/");
-      })
+      .then(() => {})
       .catch((error) => {
         // An error happened.
       });
   };
-  const LOGO_URL =
-    "https://help.nflxext.com/helpcenter/OneTrust/oneTrust_production_2025-12-03/consent/87b6a5c0-0104-4e96-a291-092c11350111/019ae4b5-d8fb-7693-90ba-7a61d24a8837/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png";
+  
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        dispatch(
+          addUser({
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+          })
+        );
+        navigate("/browse");
+      } else {
+        // User is signed out
+        dispatch(removeUser());
+        navigate("/");
+      }
+    });
+    // Unsubscribe when component unmounts
+    return () => unsubscribe();
+  }, []);
   return (
     <div className="w-full bg-gradient-to-b to-black from-transparent absolute z-10 flex justify-between">
       <img src={LOGO_URL} alt="netflix-logo" className="w-40" />

@@ -7,15 +7,13 @@ import {
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { Header } from "./Header";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { AVATAR_URL, BACKGROUND_IMG } from "../utils/constants";
 
 const Login = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const BACKGROUND_IMG =
-    "https://assets.nflxext.com/ffe/siteui/vlv3/f86b16bf-4c16-411c-8357-22d79beed09c/web/IN-en-20251222-TRIFECTA-perspective_d4acb127-f63f-4a98-ad0b-4317b0b3e500_large.jpg";
+ 
   const [isSignIn, setisSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const name = useRef("");
@@ -43,14 +41,12 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          navigate("/browse");
           console.log(user);
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           setErrorMessage(errorCode + ": :" + errorMessage);
-          navigate("/error");
         });
     } else {
       createUserWithEmailAndPassword(
@@ -62,26 +58,29 @@ const Login = () => {
           // Signed up
           const user = userCredential.user;
           updateProfile(auth.currentUser, {
-            displayName:  name?.current?.value,
-            photoURL: "https://avatars.githubusercontent.com/u/35175564?v=4",
+            displayName: name?.current?.value,
+            photoURL: AVATAR_URL,
           })
             .then(() => {
               // Profile updated!
               const user = auth.currentUser;
-               dispatch(addUser({displayName: user.displayName, email: user.email, photoURL: user.photoURL}))
-               navigate("/browse");
+              dispatch(
+                addUser({
+                  displayName: user.displayName,
+                  email: user.email,
+                  photoURL: user.photoURL,
+                })
+              );
             })
             .catch((error) => {
               // An error occurred
               // ...
             });
-         
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           setErrorMessage(errorCode + ": :" + errorMessage);
-          navigate("/error");
         });
     }
   };
