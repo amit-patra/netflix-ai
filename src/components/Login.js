@@ -1,15 +1,94 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { validateForm } from "../utils/validate";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { Header } from "./Header";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const BACKGROUND_IMG =
     "https://assets.nflxext.com/ffe/siteui/vlv3/f86b16bf-4c16-411c-8357-22d79beed09c/web/IN-en-20251222-TRIFECTA-perspective_d4acb127-f63f-4a98-ad0b-4317b0b3e500_large.jpg";
-  const [isSignIn, setIsSignIn] = useState(true);
-  const handlClik = () => {
-    setIsSignIn(!isSignIn);
+  const [isSignIn, setisSignIn] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+  const name = useRef("");
+  const email = useRef("");
+  const password = useRef("");
+  const toggleSignInForm = () => {
+    setErrorMessage("");
+    setisSignIn(!isSignIn);
+  };
+
+  const handleButton = () => {
+    const message = validateForm(
+      name?.current?.value,
+      email?.current?.value,
+      password?.current?.value
+    );
+    setErrorMessage(message);
+    if (message) return;
+    if (isSignIn) {
+      signInWithEmailAndPassword(
+        auth,
+        email?.current?.value,
+        password?.current?.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          navigate("/browse");
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + ": :" + errorMessage);
+          navigate("/error");
+        });
+    } else {
+      createUserWithEmailAndPassword(
+        auth,
+        email?.current?.value,
+        password?.current?.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          updateProfile(auth.currentUser, {
+            displayName:  name?.current?.value,
+            photoURL: "https://avatars.githubusercontent.com/u/35175564?v=4",
+          })
+            .then(() => {
+              // Profile updated!
+              const user = auth.currentUser;
+               dispatch(addUser({displayName: user.displayName, email: user.email, photoURL: user.photoURL}))
+               navigate("/browse");
+            })
+            .catch((error) => {
+              // An error occurred
+              // ...
+            });
+         
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + ": :" + errorMessage);
+          navigate("/error");
+        });
+    }
   };
 
   return (
     <div className="">
+      <Header />
       <img
         className="h-screen w-screen absolute"
         src={BACKGROUND_IMG}
@@ -17,43 +96,56 @@ const Login = () => {
       />
 
       <div className="absolute justify-center items-center flex h-screen w-screen">
-        <div className="text-white px-5 py-10 rounded-md bg-black/80 w-1/5 h-1/2">
+        <div className="text-white px-10 py-10 rounded-md bg-black/80 w-1/3 h-1/2">
           <label className="font-bold">
-            {isSignIn ? "Sign In" : "Sign Out"}
+            {isSignIn ? "Sign In" : "Sign Up"}
           </label>
-          <form className="mt-5">
+          <form onSubmit={(e) => e.preventDefault()} className="mt-5">
             {!isSignIn && (
               <input
+                ref={name}
                 className="w-full bg-gray-700 h-5 p-6 mb-3 border-solid border-white rounded-s-sm"
                 type="text"
                 placeholder="Name"
               />
             )}
             <input
+              ref={email}
               className="w-full bg-gray-700 h-5 p-6 mb-3 border-solid border-white rounded-s-sm"
               type="text"
-              placeholder="Email or mobile number"
+              placeholder="Email"
             />
             <input
+              ref={password}
               className="w-full bg-gray-700 h-5 p-6 mb-3 rounded-s-sm"
               type="password"
               placeholder="Password"
             />
-            <button className="w-full p-2 bg-red-700 text-center rounded-s-sm">
+            <p className="text-red-500 font-bold mb-2">{errorMessage}</p>
+            <button
+              className="w-full p-2 bg-red-700 text-center rounded-s-sm"
+              onClick={handleButton}
+            >
               {isSignIn ? "Sign In" : "Sign Up"}
             </button>
           </form>
           {isSignIn ? (
             <p className="pt-8">
               Alreay registred?{" "}
-              <span className="underline cursor-pointer" onClick={handlClik}>
+              <span
+                className="underline cursor-pointer"
+                onClick={toggleSignInForm}
+              >
                 Sign In
               </span>
             </p>
           ) : (
             <p className="pt-8">
               New to Netflix?{" "}
-              <span className="underline cursor-pointer" onClick={handlClik}>
+              <span
+                className="underline cursor-pointer"
+                onClick={toggleSignInForm}
+              >
                 Sign Up
               </span>
             </p>

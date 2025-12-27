@@ -2,9 +2,15 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { Browse } from "./Browse";
 import Login from "./Login";
-import { Header } from "./Header";
+import { useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { useDispatch } from "react-redux";
+import { addUser, removeUser } from "../utils/userSlice";
 
 export const Body = () => {
+  const dispatch = useDispatch();
+
   const appRouter = createBrowserRouter([
     {
       path: "/",
@@ -15,10 +21,19 @@ export const Body = () => {
       element: <Browse />,
     },
   ]);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        dispatch(addUser({uid:user.uid, email: user.email,  displayName: user.displayName, photoURL: user.photoURL}))
+      } else {
+        // User is signed out
+        dispatch(removeUser());
+      }
+    });
+  }, []);
   return (
-    <div>
-      <Header />
-      <RouterProvider router={appRouter}></RouterProvider>
-    </div>
+        <RouterProvider router={appRouter}></RouterProvider>
   );
 };
