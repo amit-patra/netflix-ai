@@ -1,6 +1,9 @@
 # Netflix AI
 - Create React App
 - Configured TailwindCSS
+- Header
+- Login Form
+- Sign up form
 
 # Features
     - Login/ Sign up
@@ -17,3 +20,6 @@
     - NetflixAI
         -Search Bar
         - Movie Suggestion
+
+# For Form Validation ( Library- formik )
+https://formik.org/
