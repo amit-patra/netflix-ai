@@ -8,13 +8,14 @@ const BackgroundVideo = ({ videoId }) => {
   );
   if (!backgroundVideos) return;
   let filterVideo = backgroundVideos?.filter((item) => item.type === "Trailer");
-  filterVideo = filterVideo.length > 0 ? filterVideo[0] : filterVideo;
-  const videoSrcUrl = `https://www.youtube.com/embed/${filterVideo.key}`
+  console.log(filterVideo);
+  filterVideo = filterVideo.length > 0 ? filterVideo[1] : filterVideo;
+  const videoSrcUrl = `https://www.youtube.com/embed/${filterVideo.key}?autoplay=1&mute=1&controls=0&rel=0&loop=1`
+  // const videoSrcUrl = `https://www.youtube.com/embed/3f3mdckpm_A?autoplay=1&mute=1&controls=0&rel=0`
   return (
-    <div className="">
+    <div className="elative w-full h-screen overflow-hidden">
       <iframe
-         width="560"
-          height="315"
+          className="w-screen aspect-video overflow-hidden"
           src={videoSrcUrl}
           title="YouTube video player"
           loading="lazy"
