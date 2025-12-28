@@ -4,4 +4,15 @@ export const LOGO_URL =
 export const BACKGROUND_IMG =
   "https://assets.nflxext.com/ffe/siteui/vlv3/f86b16bf-4c16-411c-8357-22d79beed09c/web/IN-en-20251222-TRIFECTA-perspective_d4acb127-f63f-4a98-ad0b-4317b0b3e500_large.jpg";
 
-  export const AVATAR_URL = "https://occ-0-2611-3663.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABXUncxa4k9EGMRUTsaOelaT11ryHrnpgcG4TBLjYl6HvAJAB_avZt0p9PN0AxUGZZ5KhiJgpp1gAlHOBD5mUmIZOqYabj4GysDPz.png?r=1a6";
+export const AVATAR_URL =
+  "https://occ-0-2611-3663.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABXUncxa4k9EGMRUTsaOelaT11ryHrnpgcG4TBLjYl6HvAJAB_avZt0p9PN0AxUGZZ5KhiJgpp1gAlHOBD5mUmIZOqYabj4GysDPz.png?r=1a6";
+
+export const NOW_PLAYING_MOVIE_URL = "https://api.themoviedb.org/3/movie/now_playing?page=1";
+export const API_OPTIONS = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4MzcyMDYwMzQ5YTU4MWJhNzUwYTlmZTZjNDUyNDcxOSIsIm5iZiI6MTc2Njg4OTIxNS44ODgsInN1YiI6IjY5NTA5NmZmZjI2OTI1ODU1ZDg4ZDhhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qv3tcvVDNKGWLblk7MwQT0lih0uic486tJkFhZB0mco",
+  },
+};
