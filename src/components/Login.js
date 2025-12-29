@@ -9,7 +9,8 @@ import { auth } from "../utils/firebase";
 import { Header } from "./Header";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
-import { AVATAR_URL, BACKGROUND_IMG } from "../utils/constants";
+import { AVATAR_URL, BACKGROUND_IMG_URL } from "../utils/constants";
+import { changeGptSearchStatus } from "../utils/gptSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -41,7 +42,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -90,7 +90,7 @@ const Login = () => {
       <Header />
       <img
         className="h-screen w-screen absolute"
-        src={BACKGROUND_IMG}
+        src={BACKGROUND_IMG_URL}
         alt="netflix-background"
       />
 

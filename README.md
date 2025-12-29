@@ -24,6 +24,14 @@ https://github.com/akshaymarch7/netflix-gpt
 - Create Movielist
 - Movie Card
 - Add Movie List as Upcoming Video, Now Playing Movie, Popular Movie
+- Add Button to navigate to search page
+- Add AI Search Page to search the movie
+- Add Dropdown to select the language
+- Add Constant json file to keep the text based on Language
+- Add Mutli Language Feature in AI search Page
+- Add Redux Slice for gptSearch
+- Add Redux Store for Language
+
 
 # Features
     - Login/ Sign up
@@ -38,7 +46,7 @@ https://github.com/akshaymarch7/netflix-gpt
                     - MovieLists * N
 
     - NetflixAI
-        -Search Bar
+        - Search Bar
         - Movie Suggestion
 
 # For Form Validation ( Library- formik )
