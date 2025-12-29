@@ -21,6 +21,9 @@ https://github.com/akshaymarch7/netflix-gpt
 - Bug Fix: Unsubscribe onAuthStateChanged at the time of logout
 - Bug Fix: Header User logo and Logout button displaying without login
 - Separate all URL in constants file
+- Create Movielist
+- Movie Card
+- Add Movie List as Upcoming Video, Now Playing Movie, Popular Movie
 
 # Features
     - Login/ Sign up

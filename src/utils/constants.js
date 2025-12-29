@@ -8,6 +8,9 @@ export const AVATAR_URL =
   "https://occ-0-2611-3663.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABXUncxa4k9EGMRUTsaOelaT11ryHrnpgcG4TBLjYl6HvAJAB_avZt0p9PN0AxUGZZ5KhiJgpp1gAlHOBD5mUmIZOqYabj4GysDPz.png?r=1a6";
 
 export const NOW_PLAYING_MOVIE_URL = "https://api.themoviedb.org/3/movie/now_playing?page=1";
+export const POPULAR_VIDEO_URL = "https://api.themoviedb.org/3/movie/popular?page=1";
+export const IMAGE_CDN_URL = "https://image.tmdb.org/t/p/w200";
+export const UPCOMING_VIDEO_CDN_URL = "https://api.themoviedb.org/3/movie/upcoming?page=1"
 export const API_OPTIONS = {
   method: "GET",
   headers: {

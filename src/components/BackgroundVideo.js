@@ -1,14 +1,14 @@
 import { useSelector } from "react-redux";
-import { useBackgroundVideo } from "../hooks/useBackgroundVideo";
+import {useBackgroundVideo} from "../hooks/useBackgroundVideo";
 
 const BackgroundVideo = ({ videoId }) => {
   useBackgroundVideo(videoId);
   const backgroundVideos = useSelector(
-    (store) => store?.movies?.BackgroundVides
+    (store) => store?.movies?.backgroundVides
   );
   if (!backgroundVideos) return;
   let filterVideo = backgroundVideos?.filter((item) => item.type === "Trailer");
-  console.log(filterVideo);
+  // console.log(filterVideo);
   filterVideo = filterVideo.length > 0 ? filterVideo[1] : filterVideo;
   const videoSrcUrl = `https://www.youtube.com/embed/${filterVideo.key}?autoplay=1&mute=1&controls=0&rel=0&loop=1`
   // const videoSrcUrl = `https://www.youtube.com/embed/3f3mdckpm_A?autoplay=1&mute=1&controls=0&rel=0`

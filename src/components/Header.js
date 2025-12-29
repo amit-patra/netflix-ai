@@ -45,13 +45,14 @@ export const Header = () => {
       <img src={LOGO_URL} alt="netflix-logo" className="w-40" />
       {userDetails && (
         <div className="flex">
+          <h1 className="text-white font-bold pr-1 pt-2">Hi! {userDetails.displayName}</h1>
           <img
             className="h-14 pt-1 pr-2"
             alt="user-logo"
             src={userDetails.photoURL}
           />
           <button
-            className="bg-green-400 p-2 rounded-sm text-white font-bold cursor-pointer"
+            className="bg-red-500  p-2 rounded-sm text-white font-bold cursor-pointer"
             onClick={handleSignOut}
           >
             Logout
