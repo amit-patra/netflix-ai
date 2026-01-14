@@ -1,6 +1,7 @@
 import React from "react";
 import { IMAGE_CDN_URL } from "../utils/constants";
 const MovieCard = ({ movie }) => {
+  if(!movie.poster_path) return;
   return (
     <div className="flex-none w-44 sm:w-48 md:w-52 snap-start" role="listitem">
       <img

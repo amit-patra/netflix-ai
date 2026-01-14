@@ -31,6 +31,7 @@ https://github.com/akshaymarch7/netflix-gpt
 - Add Mutli Language Feature in AI search Page
 - Add Redux Slice for gptSearch
 - Add Redux Store for Language
+- Open GPT AI Configuration has done
 
 
 # Features
@@ -56,3 +57,9 @@ https://formik.org/
     - firebase login
     - firebase init
     - firebase deploy
+
+# Open AI Npm
+ - npm i openai
+
+// Open Router key
+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

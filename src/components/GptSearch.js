@@ -1,8 +1,7 @@
 import React from "react";
 import GptSearchBar from "./GptSearchBar";
-import SearchContent from "./SearchContent";
 import { BACKGROUND_IMG_URL } from "../utils/constants";
-
+import SearchMovieList from "./SearchMovieList";
 const GptSearch = () => {
   return (
     <div className="">
@@ -16,8 +15,8 @@ const GptSearch = () => {
           <GptSearchBar />
         </div>
       </div>
-      <div className="p-2  text-white w-screen mt-56  flex justify-center items-center absolute">
-        <SearchContent />
+      <div className="p-2  text-white w-screen mt-56 absolute">
+        <SearchMovieList />
       </div>
     </div>
   );

@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { API_OPTIONS } from "../utils/constants";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {addBackgroundVedio} from "../utils/movieSlice";
 
 export const useBackgroundVideo = (videoId) => {
+const backgroundVideoList  = useSelector(store => store?.movies?.backgroundVides);
 const dispatch = useDispatch()
   const getBackgroundVideoDetails = async () => {
     const data = await fetch(
@@ -15,6 +16,6 @@ const dispatch = useDispatch()
     // console.log(json.results);
   };
   useEffect(() => {
-    getBackgroundVideoDetails();
+    !backgroundVideoList && getBackgroundVideoDetails();
   }, []);
 };
