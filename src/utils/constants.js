@@ -19,7 +19,8 @@ export const API_OPTIONS = {
   headers: {
     accept: "application/json",
     Authorization:
-      "Bearer "+process.env.REACT_APP_TMDB_TOKEN,
+      // "Bearer "+process.env.REACT_APP_TMDB_TOKEN,
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4MzcyMDYwMzQ5YTU4MWJhNzUwYTlmZTZjNDUyNDcxOSIsIm5iZiI6MTc2Njg4OTIxNS44ODgsInN1YiI6IjY5NTA5NmZmZjI2OTI1ODU1ZDg4ZDhhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qv3tcvVDNKGWLblk7MwQT0lih0uic486tJkFhZB0mco",
   },
 };
 
@@ -31,4 +32,5 @@ export const SUPPORTED_LANGUAGE = [
 
 export const OPENAI_API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
 
-export const SEARCH_MOVIE_URL = "https://api.themoviedb.org/3/search/movie?query=";
+export const SEARCH_MOVIE_URL =
+  "https://api.themoviedb.org/3/search/movie?query=";
